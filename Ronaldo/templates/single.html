@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index-2.html"><span>R</span>onaldo</a>
+        <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
+                data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav nav ml-auto">
+                <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+                <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
+                <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
+                <li class="nav-item"><a href="#services-section" class="nav-link"><span>Services</span></a>
+                </li>
+                <li class="nav-item"><a href="#projects-section" class="nav-link"><span>Projects</span></a>
+                </li>
+                <li class="nav-item"><a href="#blog-section" class="nav-link"><span>My Blog</span></a></li>
+                <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="hero-wrap js-fullheight">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center">
+            <div class="col-lg-10 ftco-animate d-flex align-items-center">
+                <div class="text text-center">
+                    <h1 class="mb-3 bread">Blog Single Post</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i
+                            class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="/#blog-section">Blog <i
+                            class="ion-ios-arrow-forward"></i></a></span> <span>Blog Single <i
+                            class="ion-ios-arrow-forward"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 ftco-animate">
+                <h2 class="mb-3">It is a long established fact a reader be distracted</h2>
+                <p>{{ blogs.content }}</p>
+                <p>
+                    <img src="{{ blogs.image.url }}" alt="" class="img-fluid">
+                </p>
+                <p>{{ blogs.content_continued }}</p>
+                <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
+                <p>{{ blogs.creative }}</p>
+                <div class="pt-5 mt-5">
+                    <h3 class="mb-5">{{ blogs.comments.all.count }} Comments</h3>
+                    <ul class="comment-list">
+                        {% for comment in blogs.comments.all %}
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="{% static 'images/person_1.jpg' %}" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>{{ comment.name }}</h3>
+                                <div class="meta">Sept. 12, 2019 at 2:21pm</div>
+                                <p>{{ comment.message}}</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-5">Leave a comment</h3>
+                        <form method="post" action="#" class="p-5 bg-light">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.name }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.website }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.message }}
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 sidebar ftco-animate">
+                <div class="sidebar-box">
+                    <form action="#" class="search-form">
+                        <div class="form-group">
+                            <span class="icon icon-search"></span>
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                    </form>
+                </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="heading-sidebar">Categories</h3>
+                    <ul class="categories">
+                        {% for category in categorys %}
+                        <li><a href="#">{{ category.title}} <span>({{ category.blog_set.all.count }})</span></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="heading-sidebar">Recent Blog</h3>
+                    {% for recent in recents %}
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url({{ recent.image.url }});"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">{{ recent.title }}</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> March 12, 2019</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="heading-sidebar">Tag Cloud</h3>
+                    <div class="tagcloud">
+                        {% for tag in tags %}
+                        <a href="#" class="tag-cloud-link">{{ tag.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="heading-sidebar">Paragraph</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus
+                        voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur
+                        similique, inventore eos fugit cupiditate numquam!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% load static %}
+<section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+    <div class="container">
+        <div class="row d-flex no-gutters">
+            {% for about in abouts %}
+            <div class="col-md-6 col-lg-6 d-flex">
+                <div class="img-about img d-flex align-items-stretch">
+                    <div class="overlay"></div>
+                    <div class="img d-flex align-self-stretch align-items-center"
+                         style="background-image:url({{ about.image.url }});">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 pl-md-5 py-5">
+                <div class="row justify-content-start pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h1 class="big">About</h1>
+                        <h2 class="mb-4">About Me</h2>
+                        <p>{{ about.text }}</p>
+                        <ul class="about-info mt-4 px-md-0 px-2">
+                            <li class="d-flex"><span>Name:</span> <span>{{ about.name }}</span></li>
+                            <li class="d-flex"><span>Date of birth:</span> <span>{{ about.birth }}</span></li>
+                            <li class="d-flex"><span>Address:</span> <span>{{ about.address }}</span></li>
+                            <li class="d-flex"><span>Zip code:</span> <span>{{ about.code }}</span></li>
+                            <li class="d-flex"><span>Email:</span> <span><a
+                                    href="https://preview.colorlib.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                    data-cfemail="f0829f9e919c949fb0979d91999cde939f9d">{{ about.email }}</a></span>
+                            </li>
+                            <li class="d-flex"><span>Phone: </span> <span>{{ about.phone }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="counter-wrap ftco-animate d-flex mt-md-3">
+                    <div class="text">
+                        <p class="mb-4">
+                            <span class="number" data-number="{{ about.project }}">0</span>
+                            <span>Project complete</span>
+                        </p>
+                        <p><a href="#contact-section" class="btn btn-primary py-3 px-3">Contact</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="ftco-section ftco-partner">
+    <div class="container">
+        <div class="row">
+            {% for sponsor in sponsors %}
+            <div class="col-sm ftco-animate">
+                <a href="#" class="partner"><img src="{{ sponsor.image.url }}" class="img-fluid"
+                                                 alt="Colorlib Template"></a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
